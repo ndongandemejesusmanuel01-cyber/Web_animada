@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tierra 3D</title>
+  <link rel="stylesheet" href="CSS/estilos.css">
+  <link rel="stylesheet" href="CSS/animaciones.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera-inner">
+      <a href="index.html" class="marca">TIERRA <span>3D</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html" class="nav-enlace" aria-current="page">Globo 3D</a>
+        <a href="guia.html" class="nav-enlace">Guía</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="contenedor">
+
+      <!-- COMPLEJO: grupos de 'radio' con el mismo 'name' permiten activar una opción a la vez en CSS -->
+      <input type="radio" name="animacion-tierra" id="modo-continentes" class="control-oculto" checked>
+      <input type="radio" name="animacion-tierra" id="modo-mares" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-clima" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-rotacion" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-atmosfera" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-capas" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-estaciones" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-tectonica" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-auroras" class="control-oculto">
+      <input type="radio" name="animacion-tierra" id="modo-biomas" class="control-oculto">
+
+      <input type="radio" name="giro-3d" id="giro-0" class="control-oculto" checked>
+      <input type="radio" name="giro-3d" id="giro-45" class="control-oculto">
+      <input type="radio" name="giro-3d" id="giro-90" class="control-oculto">
+      <input type="radio" name="giro-3d" id="giro-135" class="control-oculto">
+      <input type="radio" name="giro-3d" id="giro-180" class="control-oculto">
+      <input type="radio" name="giro-3d" id="giro-225" class="control-oculto">
+      <input type="radio" name="giro-3d" id="giro-270" class="control-oculto">
+      <input type="radio" name="giro-3d" id="giro-315" class="control-oculto">
+
+      <div class="rejilla">
+        <section class="panel" aria-label="Planeta Tierra en 3D">
+          <div class="visor-3d">
+            <div class="campo-magnetico" aria-hidden="true"></div>
+            <div class="halo-atmosferico" aria-hidden="true"></div>
+            <div class="anillo-orbital" aria-hidden="true"></div>
+
+            <div class="esfera-3d">
+              <div class="tierra">
+                <div class="continentes" aria-hidden="true"></div>
+                <div class="mares" aria-hidden="true"></div>
+                <div class="rejilla-globo" aria-hidden="true"></div>
+                <div class="clima-franjas" aria-hidden="true"></div>
+                <div class="nubes-capa" aria-hidden="true"></div>
+                <div class="fallas-tectonicas" aria-hidden="true"></div>
+                <div class="linea-ecuador" aria-hidden="true"></div>
+                <div class="sombra-noche" aria-hidden="true"></div>
+              </div>
+              <div class="nucleo-interno" aria-hidden="true"></div>
+            </div>
+
+            <!-- ANIMACIÓN: estas etiquetas aparecen y se animan al activar su modo -->
+            <div class="letra-flotan pos-continentes">🌿 Continentes</div>
+            <div class="letra-flotan pos-mares">🌊 Mares y océanos</div>
+            <div class="letra-flotan pos-clima">☀️ Clima</div>
+            <div class="letra-flotan pos-rotacion">🔄 Rotación 24 h</div>
+            <div class="letra-flotan pos-atmosfera">☁️ Atmósfera</div>
+            <div class="letra-flotan pos-capas">🔥 Capas internas</div>
+            <div class="letra-flotan pos-estaciones">🍂 Estaciones</div>
+            <div class="letra-flotan pos-tectonica">🌋 Tectónica</div>
+            <div class="letra-flotan pos-auroras">✨ Magnetosfera</div>
+            <div class="letra-flotan pos-biomas">🌱 Biomas</div>
+          </div>
+
+          <div class="control-grados-box">
+            <div class="cabecera-grados">
+              <span><strong>Girar ángulo</strong></span>
+              <span>0° → 315°</span>
+            </div>
+
+            <!-- COMPLEJO: cada 'label' con 'for' activa su 'input' correspondiente -->
+            <div class="barra-giro">
+              <label for="giro-0" class="btn-giro">0°</label>
+              <label for="giro-45" class="btn-giro">45°</label>
+              <label for="giro-90" class="btn-giro">90°</label>
+              <label for="giro-135" class="btn-giro">135°</label>
+              <label for="giro-180" class="btn-giro">180°</label>
+              <label for="giro-225" class="btn-giro">225°</label>
+              <label for="giro-270" class="btn-giro">270°</label>
+              <label for="giro-315" class="btn-giro">315°</label>
+            </div>
+
+            <div class="linea-grados-wrap">
+              <div class="linea-base">
+                <!-- ANIMACIÓN: el ancho de esta barra crece o decrece al cambiar de ángulo -->
+                <div class="linea-progreso"></div>
+              </div>
+              <div class="puntos-linea">
+                <label for="giro-0" class="punto-grado"><span class="marcador-bolita"></span><span>0°</span></label>
+                <label for="giro-45" class="punto-grado"><span class="marcador-bolita"></span><span>45°</span></label>
+                <label for="giro-90" class="punto-grado"><span class="marcador-bolita"></span><span>90°</span></label>
+                <label for="giro-135" class="punto-grado"><span class="marcador-bolita"></span><span>135°</span></label>
+                <label for="giro-180" class="punto-grado"><span class="marcador-bolita"></span><span>180°</span></label>
+                <label for="giro-225" class="punto-grado"><span class="marcador-bolita"></span><span>225°</span></label>
+                <label for="giro-270" class="punto-grado"><span class="marcador-bolita"></span><span>270°</span></label>
+                <label for="giro-315" class="punto-grado"><span class="marcador-bolita"></span><span>315°</span></label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-label="Selector de animaciones">
+          <!-- Párrafo principal marcado como h1 -->
+          <h1 class="titulo-bloque">Explora el planeta Tierra en 3D, gira su ángulo y activa distintas animaciones para ver cómo cambia cada parte junto con las letras y palabras clave que aparecen en pantalla.</h1>
+
+          <div class="rejilla-botones">
+            <label for="modo-continentes" class="boton-modo"><strong>1. Continentes</strong><small>Tierras emergidas</small></label>
+            <label for="modo-mares" class="boton-modo"><strong>2. Mares</strong><small>Océanos y corrientes</small></label>
+            <label for="modo-clima" class="boton-modo"><strong>3. Clima</strong><small>Franjas de calor</small></label>
+            <label for="modo-rotacion" class="boton-modo"><strong>4. Rotación</strong><small>Día y noche</small></label>
+            <label for="modo-atmosfera" class="boton-modo"><strong>5. Atmósfera</strong><small>Nubes y gases</small></label>
+            <label for="modo-capas" class="boton-modo"><strong>6. Capas</strong><small>Corteza, manto y núcleo</small></label>
+            <label for="modo-estaciones" class="boton-modo"><strong>7. Estaciones</strong><small>Inclinación 23,5°</small></label>
+            <label for="modo-tectonica" class="boton-modo"><strong>8. Tectónica</strong><small>Placas y fallas</small></label>
+            <label for="modo-auroras" class="boton-modo"><strong>9. Magnetosfera</strong><small>Escudo y auroras</small></label>
+            <label for="modo-biomas" class="boton-modo"><strong>10. Biomas</strong><small>Paisajes y vida</small></label>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-continentes">
+            <h3>1. Continentes</h3>
+            <p>Grandes masas de tierra fuera del agua donde se forman montañas, valles y ciudades.</p>
+            <!-- ANIMACIÓN: cada palabra aparece con animación al activar este modo -->
+            <div class="lista-palabras grupo-palabras palabras-continentes">
+              <span class="palabra">América</span><span class="palabra">África</span><span class="palabra">Europa</span><span class="palabra">Asia</span><span class="palabra">Oceanía</span><span class="palabra">Antártida</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-mares">
+            <h3>2. Mares y océanos</h3>
+            <p>Cubren ~71 % del planeta, reparten calor y mueven corrientes marinas.</p>
+            <div class="lista-palabras grupo-palabras palabras-mares">
+              <span class="palabra">Pacífico</span><span class="palabra">Atlántico</span><span class="palabra">Índico</span><span class="palabra">Ártico</span><span class="palabra">Corrientes</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-clima">
+            <h3>3. Clima</h3>
+            <p>Reparte temperaturas según la latitud: más calor cerca del ecuador y más frío en los polos.</p>
+            <div class="lista-palabras grupo-palabras palabras-clima">
+              <span class="palabra">Ecuador</span><span class="palabra">Tropical</span><span class="palabra">Templado</span><span class="palabra">Polar</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-rotacion">
+            <h3>4. Rotación</h3>
+            <p>Giro de la Tierra sobre su eje cada ~24 horas que crea el día y la noche.</p>
+            <div class="lista-palabras grupo-palabras palabras-rotacion">
+              <span class="palabra">24 horas</span><span class="palabra">Día</span><span class="palabra">Noche</span><span class="palabra">Husos horarios</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-atmosfera">
+            <h3>5. Atmósfera</h3>
+            <p>Capa de gases que rodea el planeta, mueve nubes y filtra radiación.</p>
+            <div class="lista-palabras grupo-palabras palabras-atmosfera">
+              <span class="palabra">Nubes</span><span class="palabra">Vientos</span><span class="palabra">Oxígeno</span><span class="palabra">Ozono</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-capas">
+            <h3>6. Capas internas</h3>
+            <p>El interior se divide en corteza externa, manto y un núcleo caliente en el centro.</p>
+            <div class="lista-palabras grupo-palabras palabras-capas">
+              <span class="palabra">Corteza</span><span class="palabra">Manto</span><span class="palabra">Núcleo</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-estaciones">
+            <h3>7. Estaciones</h3>
+            <p>La inclinación del eje (23,5°) cambia la luz solar a lo largo del año y genera las estaciones.</p>
+            <div class="lista-palabras grupo-palabras palabras-estaciones">
+              <span class="palabra">Primavera</span><span class="palabra">Verano</span><span class="palabra">Otoño</span><span class="palabra">Invierno</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-tectonica">
+            <h3>8. Tectónica</h3>
+            <p>Las placas de la corteza se mueven lentamente y originan volcanes, fallas y montañas.</p>
+            <div class="lista-palabras grupo-palabras palabras-tectonica">
+              <span class="palabra">Placas</span><span class="palabra">Fallas</span><span class="palabra">Volcanes</span><span class="palabra">Montañas</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-auroras">
+            <h3>9. Magnetosfera y auroras</h3>
+            <p>El campo magnético protege al planeta del viento solar y produce luces en zonas polares.</p>
+            <div class="lista-palabras grupo-palabras palabras-auroras">
+              <span class="palabra">Campo magnético</span><span class="palabra">Auroras</span><span class="palabra">Escudo solar</span>
+            </div>
+          </div>
+
+          <div class="caja-explicacion bloque-info info-biomas">
+            <h3>10. Biomas</h3>
+            <p>Conjuntos de seres vivos y paisajes adaptados al agua y al clima de cada zona.</p>
+            <div class="lista-palabras grupo-palabras palabras-biomas">
+              <span class="palabra">Selvas</span><span class="palabra">Desiertos</span><span class="palabra">Bosques</span><span class="palabra">Hielos</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>Tierra 3D</p>
+    </div>
+  </footer>
+
+</body>
+</html>
