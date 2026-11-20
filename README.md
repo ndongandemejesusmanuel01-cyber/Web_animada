@@ -14,7 +14,7 @@
 | :--- | :--- |
 | 🌐 **Web publicada** | [Ver web en GitHub Pages](https://ndongandemejesusmanuel01-cyber.github.io/Web_animada/) |
 | 💻 **Repositorio** | [ndongandemejesusmanuel01-cyber/Web_animada](https://github.com/ndongandemejesusmanuel01-cyber/Web_animada) |
-| 📁 **Portfolio** | `[Pega aquí la URL de tu portfolio]` |
+| 📁 **Portfolio** | [Portfolio — Jesús Manuel Ndong Andeme](https://ndongandemejesusmanuel01-cyber.github.io/) |
 
 ---
 
@@ -42,4 +42,4 @@
 ## 🛠️ Herramientas y recursos
 
 * **Lenguajes y editor:** desarrollado con **HTML5** y **CSS3**, editado en **Sublime Text** y probado en navegador.
-* **Apoyo de IA:** asistencia utilizada para organizar ideas, estructurar código/comentarios y redactar esta documentación, revisada y adaptada a la versión final.
+* **Apoyo de IA:** asistencia utilizada para organizar ideas, estructurar código.
