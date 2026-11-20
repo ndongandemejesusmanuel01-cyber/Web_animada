@@ -1,0 +1,290 @@
+/* Variables reutilizables de tiempos y curvas de movimiento */
+:root {
+  --dur-rapida: 180ms;
+  --dur-media: 420ms;
+  --curva-entrada: cubic-bezier(0.22, 1, 0.36, 1);
+  /* COMPLEJO: curva con ligero rebote al llegar al destino */
+  --curva-rebote: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Oculta los inputs de radio de forma accesible sin quitarlos del flujo del teclado */
+.control-oculto {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ANIMACIÓN / TRANSICIÓN: suaviza cambios de tamaño, giro, color y opacidad */
+.boton-modo,
+.btn-giro,
+.punto-grado,
+.marcador-bolita,
+.linea-progreso,
+.nav-enlace,
+.esfera-3d,
+.tierra,
+.continentes,
+.mares,
+.clima-franjas,
+.nubes-capa,
+.fallas-tectonicas,
+.campo-magnetico,
+.nucleo-interno,
+.anillo-orbital,
+.letra-flotan,
+.palabra {
+  transition:
+    width var(--dur-media) var(--curva-entrada),
+    transform var(--dur-media) var(--curva-entrada),
+    background-color var(--dur-rapida) var(--curva-entrada),
+    border-color var(--dur-rapida) var(--curva-entrada),
+    opacity var(--dur-media) var(--curva-entrada);
+}
+
+a:focus-visible,
+label:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .boton-modo:hover,
+  .btn-giro:hover,
+  .punto-grado:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+  }
+  .nav-enlace:hover { color: #38bdf8; }
+}
+
+/* COMPLEJO: el selector '~' busca hermanos posteriores marcados con ':checked' para girar en 3D */
+#giro-0:checked   ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(0deg); }
+#giro-45:checked  ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(45deg); }
+#giro-90:checked  ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(90deg); }
+#giro-135:checked ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(135deg); }
+#giro-180:checked ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(180deg); }
+#giro-225:checked ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(225deg); }
+#giro-270:checked ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(270deg); }
+#giro-315:checked ~ .rejilla .esfera-3d { transform: rotateX(14deg) rotateY(315deg); }
+
+/* Mueve la barra de progreso de la línea de grados según el ángulo activo */
+#giro-0:checked   ~ .rejilla .linea-progreso   { width: 0%; }
+#giro-45:checked  ~ .rejilla .linea-progreso  { width: 14.28%; }
+#giro-90:checked  ~ .rejilla .linea-progreso  { width: 28.57%; }
+#giro-135:checked ~ .rejilla .linea-progreso { width: 42.85%; }
+#giro-180:checked ~ .rejilla .linea-progreso { width: 57.14%; }
+#giro-225:checked ~ .rejilla .linea-progreso { width: 71.42%; }
+#giro-270:checked ~ .rejilla .linea-progreso { width: 85.71%; }
+#giro-315:checked ~ .rejilla .linea-progreso { width: 100%; }
+
+#giro-0:checked   ~ .rejilla label.btn-giro[for="giro-0"],
+#giro-45:checked  ~ .rejilla label.btn-giro[for="giro-45"],
+#giro-90:checked  ~ .rejilla label.btn-giro[for="giro-90"],
+#giro-135:checked ~ .rejilla label.btn-giro[for="giro-135"],
+#giro-180:checked ~ .rejilla label.btn-giro[for="giro-180"],
+#giro-225:checked ~ .rejilla label.btn-giro[for="giro-225"],
+#giro-270:checked ~ .rejilla label.btn-giro[for="giro-270"],
+#giro-315:checked ~ .rejilla label.btn-giro[for="giro-315"] {
+  background-color: #38bdf8;
+  color: #040711;
+  border-color: #38bdf8;
+}
+
+#giro-0:checked   ~ .rejilla label.punto-grado[for="giro-0"] .marcador-bolita,
+#giro-45:checked  ~ .rejilla label.punto-grado[for="giro-45"] .marcador-bolita,
+#giro-90:checked  ~ .rejilla label.punto-grado[for="giro-90"] .marcador-bolita,
+#giro-135:checked ~ .rejilla label.punto-grado[for="giro-135"] .marcador-bolita,
+#giro-180:checked ~ .rejilla label.punto-grado[for="giro-180"] .marcador-bolita,
+#giro-225:checked ~ .rejilla label.punto-grado[for="giro-225"] .marcador-bolita,
+#giro-270:checked ~ .rejilla label.punto-grado[for="giro-270"] .marcador-bolita,
+#giro-315:checked ~ .rejilla label.punto-grado[for="giro-315"] .marcador-bolita {
+  background-color: #34d399;
+  border-color: #ffffff;
+  transform: scale(1.25);
+}
+
+/* ANIMACIÓN: desplaza el fondo ancho de continentes de forma continua */
+@keyframes derivaContinentes {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ANIMACIÓN: mueve y rota ligeramente la capa de mares */
+@keyframes olaMares {
+  0% { transform: translateX(0) rotate(0deg); }
+  100% { transform: translateX(30px) rotate(8deg); }
+}
+
+/* ANIMACIÓN: hace que las franjas climáticas pulsen suavemente */
+@keyframes pulsoClima {
+  0%, 100% { transform: scale(1); opacity: 0.78; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+
+/* ANIMACIÓN: gira el anillo orbital sobre su propio eje */
+@keyframes giroOrbital {
+  from { transform: rotateX(72deg) rotateY(-12deg) rotateZ(0deg); }
+  to { transform: rotateX(72deg) rotateY(-12deg) rotateZ(360deg); }
+}
+
+/* ANIMACIÓN: hace circular la capa de nubes */
+@keyframes circularNubes {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ANIMACIÓN: expande y contrae el núcleo interno */
+@keyframes pulsarNucleo {
+  0%, 100% { transform: scale(0.95); }
+  50% { transform: scale(1.12); }
+}
+
+/* ANIMACIÓN: inclina el planeta entre -23.5 y 23.5 grados */
+@keyframes oscilarEstacion {
+  0%, 100% { transform: rotate(-23.5deg); }
+  50% { transform: rotate(23.5deg); }
+}
+
+/* ANIMACIÓN: pequeña oscilación para simular movimiento en fallas */
+@keyframes vibrarFallas {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.02) rotate(1.5deg); }
+  75% { transform: scale(1.02) rotate(-1.5deg); }
+}
+
+/* ANIMACIÓN: resalta el campo magnético con un pulso */
+@keyframes pulsoAurora {
+  0%, 100% { transform: scale(0.98); opacity: 0.65; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* COMPLEJO: 'hue-rotate' rota los colores del espectro sin cambiar la forma */
+@keyframes cambioBiomas {
+  0%, 100% { filter: hue-rotate(0deg) saturate(1.2); }
+  50% { filter: hue-rotate(22deg) saturate(1.45); }
+}
+
+/* ANIMACIÓN: entrada de letras y palabras con desplazamiento y rebote */
+@keyframes aparecerLetra {
+  from { opacity: 0; transform: translateY(10px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.bloque-info,
+.letra-flotan,
+.grupo-palabras {
+  display: none;
+}
+
+/* 1. Continentes */
+#modo-continentes:checked ~ .rejilla label[for="modo-continentes"] { border-color: #34d399; background-color: rgba(52, 211, 153, 0.14); }
+#modo-continentes:checked ~ .rejilla .continentes { animation: derivaContinentes 10s linear infinite; filter: saturate(1.25); }
+#modo-continentes:checked ~ .rejilla .pos-continentes,
+#modo-continentes:checked ~ .rejilla .palabras-continentes { display: flex; }
+#modo-continentes:checked ~ .rejilla .info-continentes,
+#modo-continentes:checked ~ .rejilla .pos-continentes,
+#modo-continentes:checked ~ .rejilla .palabras-continentes .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-continentes:checked ~ .rejilla .info-continentes { display: block; }
+
+/* 2. Mares */
+#modo-mares:checked ~ .rejilla label[for="modo-mares"] { border-color: #38bdf8; background-color: rgba(56, 189, 248, 0.14); }
+#modo-mares:checked ~ .rejilla .mares { opacity: 1; animation: olaMares 3.2s linear infinite; }
+#modo-mares:checked ~ .rejilla .pos-mares,
+#modo-mares:checked ~ .rejilla .palabras-mares { display: flex; }
+#modo-mares:checked ~ .rejilla .info-mares,
+#modo-mares:checked ~ .rejilla .pos-mares,
+#modo-mares:checked ~ .rejilla .palabras-mares .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-mares:checked ~ .rejilla .info-mares { display: block; }
+
+/* 3. Clima */
+#modo-clima:checked ~ .rejilla label[for="modo-clima"] { border-color: #fbbf24; background-color: rgba(251, 191, 36, 0.14); }
+#modo-clima:checked ~ .rejilla .clima-franjas { animation: pulsoClima 3s ease-in-out infinite; }
+#modo-clima:checked ~ .rejilla .pos-clima,
+#modo-clima:checked ~ .rejilla .palabras-clima { display: flex; }
+#modo-clima:checked ~ .rejilla .info-clima,
+#modo-clima:checked ~ .rejilla .pos-clima,
+#modo-clima:checked ~ .rejilla .palabras-clima .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-clima:checked ~ .rejilla .info-clima { display: block; }
+
+/* 4. Rotación */
+#modo-rotacion:checked ~ .rejilla label[for="modo-rotacion"] { border-color: #c084fc; background-color: rgba(192, 132, 252, 0.14); }
+#modo-rotacion:checked ~ .rejilla .anillo-orbital { border-color: #34d399; animation: giroOrbital 5s linear infinite; }
+#modo-rotacion:checked ~ .rejilla .continentes { animation: derivaContinentes 4.5s linear infinite; }
+#modo-rotacion:checked ~ .rejilla .pos-rotacion,
+#modo-rotacion:checked ~ .rejilla .palabras-rotacion { display: flex; }
+#modo-rotacion:checked ~ .rejilla .info-rotacion,
+#modo-rotacion:checked ~ .rejilla .pos-rotacion,
+#modo-rotacion:checked ~ .rejilla .palabras-rotacion .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-rotacion:checked ~ .rejilla .info-rotacion { display: block; }
+
+/* 5. Atmósfera */
+#modo-atmosfera:checked ~ .rejilla label[for="modo-atmosfera"] { border-color: #e2e8f0; background-color: rgba(226, 232, 240, 0.14); }
+#modo-atmosfera:checked ~ .rejilla .nubes-capa { opacity: 0.95; animation: circularNubes 6s linear infinite; }
+#modo-atmosfera:checked ~ .rejilla .halo-atmosferico { box-shadow: 0 0 52px rgba(125, 211, 252, 0.65), inset 0 0 24px rgba(255, 255, 255, 0.45); }
+#modo-atmosfera:checked ~ .rejilla .pos-atmosfera,
+#modo-atmosfera:checked ~ .rejilla .palabras-atmosfera { display: flex; }
+#modo-atmosfera:checked ~ .rejilla .info-atmosfera,
+#modo-atmosfera:checked ~ .rejilla .pos-atmosfera,
+#modo-atmosfera:checked ~ .rejilla .palabras-atmosfera .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-atmosfera:checked ~ .rejilla .info-atmosfera { display: block; }
+
+/* 6. Capas internas */
+#modo-capas:checked ~ .rejilla label[for="modo-capas"] { border-color: #fb923c; background-color: rgba(251, 146, 60, 0.14); }
+#modo-capas:checked ~ .rejilla .tierra { transform: scale(0.84); border: 6px solid #a16207; }
+#modo-capas:checked ~ .rejilla .nucleo-interno { opacity: 1; animation: pulsarNucleo 2.4s ease-in-out infinite; }
+#modo-capas:checked ~ .rejilla .pos-capas,
+#modo-capas:checked ~ .rejilla .palabras-capas { display: flex; }
+#modo-capas:checked ~ .rejilla .info-capas,
+#modo-capas:checked ~ .rejilla .pos-capas,
+#modo-capas:checked ~ .rejilla .palabras-capas .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-capas:checked ~ .rejilla .info-capas { display: block; }
+
+/* 7. Estaciones */
+#modo-estaciones:checked ~ .rejilla label[for="modo-estaciones"] { border-color: #f472b6; background-color: rgba(244, 114, 182, 0.14); }
+#modo-estaciones:checked ~ .rejilla .tierra { animation: oscilarEstacion 6s ease-in-out infinite; }
+#modo-estaciones:checked ~ .rejilla .clima-franjas { opacity: 0.85; }
+#modo-estaciones:checked ~ .rejilla .pos-estaciones,
+#modo-estaciones:checked ~ .rejilla .palabras-estaciones { display: flex; }
+#modo-estaciones:checked ~ .rejilla .info-estaciones,
+#modo-estaciones:checked ~ .rejilla .pos-estaciones,
+#modo-estaciones:checked ~ .rejilla .palabras-estaciones .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-estaciones:checked ~ .rejilla .info-estaciones { display: block; }
+
+/* 8. Tectónica */
+#modo-tectonica:checked ~ .rejilla label[for="modo-tectonica"] { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.14); }
+#modo-tectonica:checked ~ .rejilla .fallas-tectonicas { border: 2.5px dashed #fb923c; box-shadow: inset 0 0 18px rgba(239, 68, 68, 0.55); animation: vibrarFallas 1.6s ease-in-out infinite; }
+#modo-tectonica:checked ~ .rejilla .pos-tectonica,
+#modo-tectonica:checked ~ .rejilla .palabras-tectonica { display: flex; }
+#modo-tectonica:checked ~ .rejilla .info-tectonica,
+#modo-tectonica:checked ~ .rejilla .pos-tectonica,
+#modo-tectonica:checked ~ .rejilla .palabras-tectonica .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-tectonica:checked ~ .rejilla .info-tectonica { display: block; }
+
+/* 9. Auroras y magnetosfera */
+#modo-auroras:checked ~ .rejilla label[for="modo-auroras"] { border-color: #2dd4bf; background-color: rgba(45, 212, 191, 0.14); }
+#modo-auroras:checked ~ .rejilla .campo-magnetico { border-color: rgba(45, 212, 191, 0.75); box-shadow: 0 0 35px rgba(45, 212, 191, 0.45); animation: pulsoAurora 2.8s ease-in-out infinite; }
+#modo-auroras:checked ~ .rejilla .pos-auroras,
+#modo-auroras:checked ~ .rejilla .palabras-auroras { display: flex; }
+#modo-auroras:checked ~ .rejilla .info-auroras,
+#modo-auroras:checked ~ .rejilla .pos-auroras,
+#modo-auroras:checked ~ .rejilla .palabras-auroras .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-auroras:checked ~ .rejilla .info-auroras { display: block; }
+
+/* 10. Biomas */
+#modo-biomas:checked ~ .rejilla label[for="modo-biomas"] { border-color: #a3e635; background-color: rgba(163, 230, 53, 0.14); }
+#modo-biomas:checked ~ .rejilla .continentes { animation: cambioBiomas 4s ease-in-out infinite; }
+#modo-biomas:checked ~ .rejilla .pos-biomas,
+#modo-biomas:checked ~ .rejilla .palabras-biomas { display: flex; }
+#modo-biomas:checked ~ .rejilla .info-biomas,
+#modo-biomas:checked ~ .rejilla .pos-biomas,
+#modo-biomas:checked ~ .rejilla .palabras-biomas .palabra { animation: aparecerLetra var(--dur-media) var(--curva-rebote) both; }
+#modo-biomas:checked ~ .rejilla .info-biomas { display: block; }
+
+/* COMPLEJO: media query de accesibilidad para reducir movimientos si el sistema lo pide */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
